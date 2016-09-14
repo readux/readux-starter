@@ -1,4 +1,4 @@
-(ns boot.new.readux_starter
+(ns boot.new.readux-starter
   (:require [boot.new.templates :refer [renderer year project-name
                                         ->files sanitize-ns name-to-path
                                         multi-segment]]))
@@ -9,7 +9,8 @@
   "A readux starter template."
   [name]
   (let [main-ns (multi-segment (sanitize-ns name))
-        data {:name (project-name name)
+        data {:raw-name name
+              :name (project-name name)
               :namespace main-ns
               :sanitized (name-to-path main-ns)
               :year (year)}]
@@ -19,7 +20,7 @@
              ["build.boot" (render "build.boot" data)]
              [".gitignore" (render "gitignore" data)]
              ["LICENSE" (render "LICENSE" data)]
-             ["src/cljs/{{nested-dirs}}/core.cljs" (render "core.cljs" data)]
-             ["src/cljc/{{nested-dirs}}/core.cljs" (render "core.cljc" data)]
+             ["src/cljs/{{sanitized}}.cljs" (render "core.cljs" data)]
+             ["src/cljc/{{sanitized}}.cljc" (render "core.cljc" data)]
              ["public/index.html" (render "index.html" data)]
              ["public/css/style.css" (render "style.css" data)])))

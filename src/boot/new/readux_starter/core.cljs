@@ -1,4 +1,4 @@
-(ns {{namespace}}.core
+(ns {{namespace}}
   (:require [reagent.core :as r]
             [reagent.ratom :refer [reaction]]
             [readux.core :as rdc :include-macros true]
@@ -12,8 +12,9 @@
 (def app-reducer
   (rdc/reducer-fn
     [model action]
-    :incr (update model :counter inc)
-    :decr (update model :counter dec)))
+    {:counter 0}
+    {:incr (update model :counter inc)
+     :decr (update model :counter dec)}))
 
 ;; store
 ;; -----
@@ -40,8 +41,8 @@
 (defn- app
   [store]
   (let [counter-value (rdc/query store [:counter-value])
-        on-inc #(rdc/dispatch store {:type :inc})
-        on-dec #(rdc/dispatch store {:type :dec})]
+        on-inc #(rdc/dispatch store {:type :incr})
+        on-dec #(rdc/dispatch store {:type :decr})]
     (fn app-render []
       [:div
       [counter counter-value on-inc on-dec]])))

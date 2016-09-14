@@ -1,5 +1,5 @@
 (set-env!
-  :resource-paths #{"src/cljs" "src/cljc"}
+  :resource-paths #{"public" "src/cljs" "src/cljc"}
   :dependencies '[[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.227"]
                  [adzerk/boot-cljs "1.7.228-1" :scope "test"]
@@ -8,11 +8,13 @@
                  [adzerk/boot-cljs-repl "0.3.3" :scope "test"]
                  [com.cemerick/piggieback "0.2.1" :scope "test"]
                  [weasel "0.7.0" :scope "test"]
-                 [org.clojure/tools.nrepl "0.2.12" :scope "test"]]
+                 [org.clojure/tools.nrepl "0.2.12" :scope "test"]
+                 [reagent "0.6.0"]
+                 [readux "0.1.4-SNAPSHOT"]]
   ;; use if this project should automatically rebuild when some other
   ;; project is changed...
   ;;:checkouts '[[foo-lib "0.1.0-SNAPSHOT"]]
-  :project 'readux-promesa
+  :project '{{raw-name}}
   :version "0.1.0-SNAPSHOT")
 
 (require '[adzerk.boot-cljs :refer [cljs]]
@@ -24,9 +26,9 @@
   pom {:project (get-env :project)
        :version (get-env :version)
        :license {"MIT" "https://mit-license.org/"}
-       :url "https://readux.github.io"
+       :url "<FIXME: URL HERE>"
        :description "middleware functionality for automatic resolution of promesa-promises"}
-  jar {:main 'readux.core
+  jar {:main '{{namespace}}
        :file (format "%s-%s-standalone.jar" (get-env :project) (get-env :version))}
   cljs-repl {:nrepl-opts {:port 9000}})
 

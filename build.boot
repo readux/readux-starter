@@ -1,4 +1,4 @@
-(def version "0.1.2-SNAPSHOT")
+(def version "0.1.4")
 
 (task-options!
  pom {:project     'readux-starter/boot-template
@@ -12,7 +12,9 @@
           :dependencies   '[[org.clojure/clojure   "RELEASE"]
                             [seancorfield/boot-new "RELEASE"]])
 
-(deftask build []
+(deftask local
+  "build & install jar into local (~/.m2) Maven repository"
+  []
   (comp (pom) (jar) (install)))
 
 ;; These tasks are a simplification of what's found in
